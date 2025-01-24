@@ -55,12 +55,13 @@
     .character img {
       width: 100px;
       height: 100px;
-      border-radius: 50%;
+      border-radius: 50%; /* Garder la bordure arrondie si tu veux des bords arrondis */
+      box-shadow: none; /* Enlever l'ombre autour des images */
+      border: none; /* Enlever le contour */
     }
 
     .selected {
-      border: 3px solid #8b7b9c;
-      box-shadow: 0 0 10px #8b7b9c;
+      /* On n'ajoute pas de bordure ou ombre ici pour éviter qu'il ne recouvre les PNG */
     }
 
     .message {
@@ -73,7 +74,7 @@
 
     #continue-button {
       font-family: 'CaveStory', sans-serif; /* Appliquer la police CaveStory au bouton */
-      display: none;
+      display: none; /* Bouton caché par défaut */
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 20px;
@@ -148,8 +149,13 @@
       // Enregistre le personnage sélectionné
       selectedCharacter = character;
 
-      // Affiche le bouton "Continuer" une fois qu'un personnage est sélectionné
-      document.getElementById('continue-button').style.display = 'block';
+      // Affiche ou cache le bouton "Continuer" en fonction de la sélection
+      const continueButton = document.getElementById('continue-button');
+      if (selectedCharacter) {
+        continueButton.style.display = 'block';
+      } else {
+        continueButton.style.display = 'none';
+      }
     }
 
     // Fonction pour rediriger vers la page de redirection avec le personnage sélectionné
