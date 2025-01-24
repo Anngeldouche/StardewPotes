@@ -22,24 +22,16 @@
       display: flex;
       justify-content: center;
       gap: 40px;
-      flex-wrap: wrap;
       margin-top: 20px;
-      text-align: center;
     }
 
     .character {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%; /* Bordure arrondie */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       cursor: pointer;
       transition: 0.3s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: transparent; /* Pas de fond blanc */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      flex-direction: column; /* Pour empiler l'image et le texte verticalement */
-      align-items: center;
+      text-align: center;
     }
 
     .character:hover {
@@ -57,9 +49,16 @@
       box-shadow: 0 0 10px #8b7b9c;
     }
 
+    .message {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #8b7b9c;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
     #continue-button {
       display: none;
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 10px 20px;
       font-size: 16px;
       background-color: #8b7b9c;
@@ -73,35 +72,26 @@
       background-color: #7a6a85;
     }
 
-    #message-container {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #8b7b9c;
-      font-size: 18px;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
   <div class="character-grid">
     <!-- Personnage 1 -->
-    <div class="character" onclick="selectCharacter('Copain 1', 'Veux-tu jouer Angle?')">
+    <div class="character" onclick="selectCharacter('Copain 1', 'Veux-tu jouer Angle?', 'message1')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
       <div id="message1" class="message"></div> <!-- Texte sous le personnage -->
     </div>
     <!-- Personnage 2 -->
-    <div class="character" onclick="selectCharacter('Copain 2', 'Veux-tu jouer Chim?')">
+    <div class="character" onclick="selectCharacter('Copain 2', 'Veux-tu jouer Chim?', 'message2')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
       <div id="message2" class="message"></div>
     </div>
     <!-- Personnage 3 -->
-    <div class="character" onclick="selectCharacter('Copain 3', 'Veux-tu jouer Zonzon?')">
+    <div class="character" onclick="selectCharacter('Copain 3', 'Veux-tu jouer Zonzon?', 'message3')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
       <div id="message3" class="message"></div>
     </div>
   </div>
-
-  <!-- Message dynamique qui s'affiche après avoir sélectionné un personnage -->
-  <div id="message-container"></div>
 
   <!-- Bouton continuer qui devient visible quand un perso est sélectionné -->
   <button id="continue-button" onclick="continueToMap()">Continuer</button>
@@ -111,7 +101,7 @@
     let message = '';
 
     // Fonction pour sélectionner un personnage et afficher un message
-    function selectCharacter(character, msg) {
+    function selectCharacter(character, msg, messageId) {
       // Réinitialise toutes les sélections
       document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
 
@@ -122,8 +112,8 @@
       // Enregistre le personnage sélectionné
       selectedCharacter = character;
 
-      // Affiche le message sous le personnage
-      document.getElementById('message-container').textContent = msg;
+      // Affiche le message sous le personnage sélectionné
+      document.getElementById(messageId).textContent = msg;
 
       // Affiche le bouton "Continuer" une fois qu'un personnage est sélectionné
       document.getElementById('continue-button').style.display = 'block';
