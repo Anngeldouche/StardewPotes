@@ -14,9 +14,9 @@
     }
 
     body {
-      font-family: 'CaveStory', sans-serif; /* Appliquer la police CaveStory */
+      font-family: 'CaveStory', sans-serif;
       text-align: center;
-      background-color: #f7c7e0; /* Fond rose clair */
+      background-color: #f7c7e0;
       margin: 0;
       padding: 20px;
       height: 100vh;
@@ -55,26 +55,29 @@
     .character img {
       width: 100px;
       height: 100px;
-      border-radius: 50%; /* Garder la bordure arrondie si tu veux des bords arrondis */
-      box-shadow: none; /* Enlever l'ombre autour des images */
-      border: none; /* Enlever le contour */
+      border-radius: 50%;
     }
 
     .selected {
-      transform: scale(1.2); /* L'effet agrandit l'image quand un personnage est sélectionné */
+      border: 3px solid #8b7b9c;
+      box-shadow: 0 0 10px #8b7b9c;
+    }
+
+    .locked {
+      transform: scale(1.1); /* Garder l'effet d'agrandissement quand verrouillé */
     }
 
     .message {
-      font-family: 'CaveStory', sans-serif; /* Appliquer la police CaveStory aux messages */
+      font-family: 'CaveStory', sans-serif;
       color: #8b7b9c;
-      font-size: 20px;
+      font-size: 30px;
       margin-top: 10px;
-      display: none; /* Phrase cachée par défaut */
+      display: none;
     }
 
     #continue-button {
-      font-family: 'CaveStory', sans-serif; /* Appliquer la police CaveStory au bouton */
-      display: none; /* Bouton caché par défaut */
+      font-family: 'CaveStory', sans-serif;
+      display: none;
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 20px;
@@ -101,7 +104,7 @@
          onmouseout="hideMessage('message1')"
          onclick="selectCharacter('Copain 1', 'Angle', 'message1')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
-      <div id="message1" class="message">Angle?</div> <!-- Phrase cachée par défaut -->
+      <div id="message1" class="message">Angle?</div>
     </div>
     <!-- Personnage 2 -->
     <div class="character" 
@@ -121,69 +124,45 @@
     </div>
   </div>
 
-  <!-- Bouton continuer qui devient visible quand un perso est sélectionné -->
   <button id="continue-button" onclick="continueToMap()">Go</button>
 
   <script>
     let selectedCharacter = null;
-    let previouslySelectedElement = null; // Stocke le personnage précédemment sélectionné
 
-    // Fonction pour afficher le message lorsque le curseur est sur le personnage
     function showMessage(messageId) {
       document.getElementById(messageId).style.display = 'block';
     }
 
-    // Fonction pour cacher le message lorsque le curseur quitte le personnage
     function hideMessage(messageId) {
       document.getElementById(messageId).style.display = 'none';
     }
 
-    // Fonction pour sélectionner un personnage
-    function selectCharacter(character, lastName, messageId) {
-      // Si un personnage est déjà sélectionné, il faut le déverrouiller
-      if (previouslySelectedElement) {
-        previouslySelectedElement.classList.remove('selected');
-        document.getElementById(previouslySelectedElement.getAttribute('data-message')).style.display = 'none';
-      }
+    function selectCharacter(character, messageId) {
+      // Réinitialise toutes les sélections sauf celle du personnage "verrouillé"
+      document.querySelectorAll('.character').forEach(el => {
+        el.classList.remove('selected');
+        el.classList.remove('locked');
+      });
 
+      // Si le personnage est déjà "verrouillé", le déverrouiller
       const clickedElement = event.currentTarget;
-      
-      // Si le même personnage est cliqué, le déverrouiller
-      if (clickedElement === previouslySelectedElement) {
-        clickedElement.classList.remove('selected');
-        document.getElementById(clickedElement.getAttribute('data-message')).style.display = 'none';
-        previouslySelectedElement = null; // Réinitialise la sélection
-        document.getElementById('continue-button').style.display = 'none'; // Cacher le bouton "Go"
-        return;
+      if (clickedElement.classList.contains('locked')) {
+        clickedElement.classList.remove('locked');
+        selectedCharacter = null;
+        document.getElementById('continue-button').style.display = 'none';
+      } else {
+        // Si ce n'est pas verrouillé, on l'ajoute à "locked"
+        clickedElement.classList.add('locked');
+        selectedCharacter = character;
+        document.getElementById('continue-button').style.display = 'block';
       }
-
-      // Sinon, verrouiller ce personnage
-      clickedElement.classList.add('selected');
-      document.getElementById(clickedElement.getAttribute('data-message')).style.display = 'block';
-      previouslySelectedElement = clickedElement;
-      
-      // Afficher le bouton "Go" lorsque le personnage est verrouillé
-      document.getElementById('continue-button').style.display = 'block';
     }
 
-    // Fonction pour rediriger vers la page de redirection avec le personnage sélectionné
     function continueToMap() {
-      if (previouslySelectedElement) {
-        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(previouslySelectedElement.getAttribute('data-character'))}`;
+      if (selectedCharacter) {
+        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(selectedCharacter)}`;
       }
     }
-
-    // Permet de désélectionner le personnage si on clique ailleurs sur la page
-    document.body.addEventListener('click', function(event) {
-      if (!event.target.closest('.character')) {
-        if (previouslySelectedElement) {
-          previouslySelectedElement.classList.remove('selected');
-          document.getElementById(previouslySelectedElement.getAttribute('data-message')).style.display = 'none';
-          previouslySelectedElement = null;
-          document.getElementById('continue-button').style.display = 'none';
-        }
-      }
-    });
   </script>
 </body>
 </html>
