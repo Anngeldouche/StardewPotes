@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sélection de Personnage</title>
   <style>
+    /* Ajout de la police via @font-face */
+    @font-face {
+      font-family: 'CaveStory';
+      src: url('https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/fonts/Cave-Story.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'CaveStory', sans-serif; /* Appliquer la police CaveStory */
       text-align: center;
       background-color: #f7c7e0; /* Fond rose clair */
       margin: 0;
@@ -60,7 +68,7 @@
       color: #8b7b9c;
       font-size: 18px;
       margin-top: 10px;
-      display: none; /* Phrase cachée au départ */
+      display: none; /* Phrase cachée par défaut */
     }
 
     #continue-button {
