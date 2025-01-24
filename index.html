@@ -24,6 +24,7 @@
       gap: 40px;
       flex-wrap: wrap;
       margin-top: 20px;
+      text-align: center;
     }
 
     .character {
@@ -37,7 +38,7 @@
       align-items: center;
       background-color: transparent; /* Pas de fond blanc */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      flex-direction: column; /* Assure le texte sous l'image */
+      flex-direction: column; /* Pour empiler l'image et le texte verticalement */
       align-items: center;
     }
 
@@ -78,12 +79,6 @@
       font-size: 18px;
       margin-top: 10px;
     }
-
-    /* Assurer que le texte est sous les images */
-    .character + #message-container {
-      text-align: center;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
@@ -91,14 +86,17 @@
     <!-- Personnage 1 -->
     <div class="character" onclick="selectCharacter('Copain 1', 'Veux-tu jouer Angle?')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
+      <div id="message1" class="message"></div> <!-- Texte sous le personnage -->
     </div>
     <!-- Personnage 2 -->
     <div class="character" onclick="selectCharacter('Copain 2', 'Veux-tu jouer Chim?')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
+      <div id="message2" class="message"></div>
     </div>
     <!-- Personnage 3 -->
     <div class="character" onclick="selectCharacter('Copain 3', 'Veux-tu jouer Zonzon?')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
+      <div id="message3" class="message"></div>
     </div>
   </div>
 
@@ -125,8 +123,7 @@
       selectedCharacter = character;
 
       // Affiche le message sous le personnage
-      message = msg;
-      document.getElementById('message-container').textContent = message;
+      document.getElementById('message-container').textContent = msg;
 
       // Affiche le bouton "Continuer" une fois qu'un personnage est sélectionné
       document.getElementById('continue-button').style.display = 'block';
