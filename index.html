@@ -149,12 +149,12 @@
       if (clickedElement.classList.contains('locked')) {
         clickedElement.classList.remove('locked');
         selectedCharacter = null;
-        document.getElementById('continue-button').style.display = 'none';
+        document.getElementById('continue-button').style.display = 'none';  // Cacher le bouton "Go"
       } else {
         // Si ce n'est pas verrouillé, on l'ajoute à "locked"
         clickedElement.classList.add('locked');
         selectedCharacter = character;
-        document.getElementById('continue-button').style.display = 'block';
+        document.getElementById('continue-button').style.display = 'block';  // Afficher le bouton "Go"
       }
     }
 
