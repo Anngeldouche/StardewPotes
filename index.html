@@ -164,6 +164,11 @@
         window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(selectedCharacter)}`;
       }
     }
+
+    // Cette fonction s'assure que le bouton "Go" est bien masqué au démarrage
+    window.onload = function() {
+      document.getElementById('continue-button').style.display = 'none';
+    }
   </script>
 </body>
 </html>
