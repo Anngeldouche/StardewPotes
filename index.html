@@ -37,6 +37,7 @@
       align-items: center;
       background-color: transparent; /* Pas de fond blanc */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      flex-direction: column; /* Permet d'afficher le texte sous l'image */
     }
 
     .character:hover {
@@ -50,8 +51,8 @@
     }
 
     .selected {
-      border: 3px solid #b3dba7;
-      box-shadow: 0 0 10px #b3dba7;
+      border: 3px solid #8b7b9c;
+      box-shadow: 0 0 10px #8b7b9c;
     }
 
     #continue-button {
@@ -59,7 +60,7 @@
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #b3dba7;
+      background-color: #8b7b9c;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -67,17 +68,17 @@
     }
 
     #continue-button:hover {
-      background-color: #9ebf94;
+      background-color: #7a6a85;
     }
 
     #message-container {
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #b3dba7;
+      color: #8b7b9c;
       font-size: 18px;
       margin-top: 10px;
     }
 
-    /* Centrer le texte sous les images */
+    /* Assurer que le message est sous les images et centré */
     .character-grid .character + #message-container {
       text-align: center;
       margin-top: 10px;
