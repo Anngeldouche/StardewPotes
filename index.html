@@ -165,6 +165,22 @@
       }
     }
 
+    // Désélectionner si on clique ailleurs sur la page
+    window.onclick = function(event) {
+      const characters = document.querySelectorAll('.character');
+      const button = document.getElementById('continue-button');
+      
+      // Si on clique en dehors des personnages et du bouton "Go", désélectionner tout
+      if (!event.target.closest('.character') && event.target !== button) {
+        // Réinitialiser la sélection
+        characters.forEach(el => {
+          el.classList.remove('locked');
+        });
+        selectedCharacter = null;
+        document.getElementById('continue-button').style.display = 'none';  // Cacher le bouton "Go"
+      }
+    }
+
     // Cette fonction s'assure que le bouton "Go" est bien masqué au démarrage
     window.onload = function() {
       document.getElementById('continue-button').style.display = 'none';
