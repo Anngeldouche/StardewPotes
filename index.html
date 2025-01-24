@@ -61,13 +61,13 @@
     }
 
     .selected {
-      /* On n'ajoute pas de bordure ou ombre ici pour éviter qu'il ne recouvre les PNG */
+      transform: scale(1.2); /* L'effet agrandit l'image quand un personnage est sélectionné */
     }
 
     .message {
       font-family: 'CaveStory', sans-serif; /* Appliquer la police CaveStory aux messages */
       color: #8b7b9c;
-      font-size: 30px;
+      font-size: 20px;
       margin-top: 10px;
       display: none; /* Phrase cachée par défaut */
     }
@@ -126,6 +126,7 @@
 
   <script>
     let selectedCharacter = null;
+    let previouslySelectedElement = null; // Stocke le personnage précédemment sélectionné
 
     // Fonction pour afficher le message lorsque le curseur est sur le personnage
     function showMessage(messageId) {
@@ -139,32 +140,50 @@
 
     // Fonction pour sélectionner un personnage
     function selectCharacter(character, lastName, messageId) {
-      // Réinitialise toutes les sélections
-      document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
-
-      // Ajoute la classe 'selected' au personnage cliqué
-      const clickedElement = event.currentTarget;
-      clickedElement.classList.add('selected');
-
-      // Enregistre le personnage sélectionné
-      selectedCharacter = character;
-
-      // Affiche ou cache le bouton "Continuer" en fonction de la sélection
-      const continueButton = document.getElementById('continue-button');
-      if (selectedCharacter) {
-        continueButton.style.display = 'block';
-      } else {
-        continueButton.style.display = 'none';
+      // Si un personnage est déjà sélectionné, il faut le déverrouiller
+      if (previouslySelectedElement) {
+        previouslySelectedElement.classList.remove('selected');
+        document.getElementById(previouslySelectedElement.getAttribute('data-message')).style.display = 'none';
       }
+
+      const clickedElement = event.currentTarget;
+      
+      // Si le même personnage est cliqué, le déverrouiller
+      if (clickedElement === previouslySelectedElement) {
+        clickedElement.classList.remove('selected');
+        document.getElementById(clickedElement.getAttribute('data-message')).style.display = 'none';
+        previouslySelectedElement = null; // Réinitialise la sélection
+        document.getElementById('continue-button').style.display = 'none'; // Cacher le bouton "Go"
+        return;
+      }
+
+      // Sinon, verrouiller ce personnage
+      clickedElement.classList.add('selected');
+      document.getElementById(clickedElement.getAttribute('data-message')).style.display = 'block';
+      previouslySelectedElement = clickedElement;
+      
+      // Afficher le bouton "Go" lorsque le personnage est verrouillé
+      document.getElementById('continue-button').style.display = 'block';
     }
 
     // Fonction pour rediriger vers la page de redirection avec le personnage sélectionné
     function continueToMap() {
-      if (selectedCharacter) {
-        // Redirige vers la page de redirection avec le personnage sélectionné
-        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(selectedCharacter)}`;
+      if (previouslySelectedElement) {
+        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(previouslySelectedElement.getAttribute('data-character'))}`;
       }
     }
+
+    // Permet de désélectionner le personnage si on clique ailleurs sur la page
+    document.body.addEventListener('click', function(event) {
+      if (!event.target.closest('.character')) {
+        if (previouslySelectedElement) {
+          previouslySelectedElement.classList.remove('selected');
+          document.getElementById(previouslySelectedElement.getAttribute('data-message')).style.display = 'none';
+          previouslySelectedElement = null;
+          document.getElementById('continue-button').style.display = 'none';
+        }
+      }
+    });
   </script>
 </body>
 </html>
