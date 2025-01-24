@@ -138,6 +138,8 @@
     }
 
     function selectCharacter(character, messageId) {
+      const clickedElement = event.currentTarget;
+
       // Réinitialise toutes les sélections sauf celle du personnage "verrouillé"
       document.querySelectorAll('.character').forEach(el => {
         el.classList.remove('selected');
@@ -145,7 +147,6 @@
       });
 
       // Si le personnage est déjà "verrouillé", le déverrouiller
-      const clickedElement = event.currentTarget;
       if (clickedElement.classList.contains('locked')) {
         clickedElement.classList.remove('locked');
         selectedCharacter = null;
