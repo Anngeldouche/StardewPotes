@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sélection de Personnage</title>
   <style>
-    /* Ajout de la police via @font-face */
     @font-face {
       font-family: 'CaveStory';
       src: url('https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/fonts/Cave-Story.ttf') format('truetype');
@@ -64,7 +63,7 @@
     }
 
     .locked {
-      transform: scale(1.1); /* Garder l'effet d'agrandissement quand verrouillé */
+      transform: scale(1.1);
     }
 
     .message {
@@ -92,54 +91,47 @@
       background-color: #7a6a85;
     }
 
-    /* Nouvelle couleur pour le texte du bouton "Go" */
     #continue-button span {
-      color: #6d5b7b;  /* 2 teintes plus sombres que le fond du bouton */
+      color: #6d5b7b;
     }
-
   </style>
 </head>
-<body>
+<body onclick="deselectCharacter(event)">
   <h1>Choose your fighter</h1>
 
   <div class="character-grid">
-    <!-- Personnage 1 -->
     <div class="character" 
          onmouseover="showMessage('message1')" 
          onmouseout="hideMessage('message1')"
-         onclick="selectCharacter('Copain 1', 'message1', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png')">
+         onclick="selectCharacter(event, 'Copain 1', 'message1', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
       <div id="message1" class="message">Angle?</div>
     </div>
-    <!-- Personnage 2 -->
     <div class="character" 
          onmouseover="showMessage('message2')" 
          onmouseout="hideMessage('message2')"
-         onclick="selectCharacter('Copain 2', 'message2', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png')">
+         onclick="selectCharacter(event, 'Copain 2', 'message2', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
       <div id="message2" class="message">Chim?</div> 
     </div>
-    <!-- Personnage 3 -->
     <div class="character" 
          onmouseover="showMessage('message3')" 
          onmouseout="hideMessage('message3')"
-         onclick="selectCharacter('Copain 3', 'message3', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png')">
+         onclick="selectCharacter(event, 'Copain 3', 'message3', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
       <div id="message3" class="message">Zonzon?</div>
     </div>
-    <!-- Personnage 4 (Luc) -->
     <div class="character" 
          onmouseover="showMessage('message4')" 
          onmouseout="hideMessage('message4')"
-         onclick="selectCharacter('Copain 4', 'message4', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png')">
+         onclick="selectCharacter(event, 'Copain 4', 'message4', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png" alt="Copain 4">
       <div id="message4" class="message">Luc?</div>
     </div>
-    <!-- Personnage 5 (Mori) -->
     <div class="character" 
          onmouseover="showMessage('message5')" 
          onmouseout="hideMessage('message5')"
-         onclick="selectCharacter('Copain 5', 'message5', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png')">
+         onclick="selectCharacter(event, 'Copain 5', 'message5', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png" alt="Copain 5">
       <div id="message5" class="message">Mori?</div> 
     </div>
@@ -160,28 +152,20 @@
       document.getElementById(messageId).style.display = 'none';
     }
 
-    function selectCharacter(character, messageId, imageUrl) {
+    function selectCharacter(event, character, messageId, imageUrl) {
+      event.stopPropagation(); // Empêche l'événement de clic de se propager au body
+      document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
       const clickedElement = event.currentTarget;
+      clickedElement.classList.add('selected');
+      selectedCharacter = { name: character, image: imageUrl };
+      document.getElementById('continue-button').style.display = 'block';
+    }
 
-      // Réinitialise toutes les sélections sauf celle du personnage "verrouillé"
-      document.querySelectorAll('.character').forEach(el => {
-        el.classList.remove('selected');
-        el.classList.remove('locked');
-      });
-
-      // Si le personnage est déjà "verrouillé", le déverrouiller
-      if (clickedElement.classList.contains('locked')) {
-        clickedElement.classList.remove('locked');
+    function deselectCharacter(event) {
+      if (!event.target.closest('.character')) { // Vérifie si le clic n'est pas sur un personnage
+        document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
         selectedCharacter = null;
-        document.getElementById('continue-button').style.display = 'none';  // Cacher le bouton "Go"
-      } else {
-        // Si ce n'est pas verrouillé, on l'ajoute à "locked"
-        clickedElement.classList.add('locked');
-        selectedCharacter = {
-          name: character,
-          image: imageUrl
-        };
-        document.getElementById('continue-button').style.display = 'block';  // Afficher le bouton "Go"
+        document.getElementById('continue-button').style.display = 'none';
       }
     }
 
@@ -191,10 +175,6 @@
         window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(name)}&image=${encodeURIComponent(image)}`;
       }
     }
-
-    window.onload = function() {
-      document.getElementById('continue-button').style.display = 'none';
-    };
   </script>
 </body>
 </html>
