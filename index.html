@@ -107,7 +107,7 @@
     <div class="character" 
          onmouseover="showMessage('message1')" 
          onmouseout="hideMessage('message1')"
-         onclick="selectCharacter('Copain 1', 'Angle', 'message1')">
+         onclick="selectCharacter('Copain 1', 'message1', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
       <div id="message1" class="message">Angle?</div>
     </div>
@@ -115,7 +115,7 @@
     <div class="character" 
          onmouseover="showMessage('message2')" 
          onmouseout="hideMessage('message2')"
-         onclick="selectCharacter('Copain 2', 'Chim', 'message2')">
+         onclick="selectCharacter('Copain 2', 'message2', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
       <div id="message2" class="message">Chim?</div> 
     </div>
@@ -123,7 +123,7 @@
     <div class="character" 
          onmouseover="showMessage('message3')" 
          onmouseout="hideMessage('message3')"
-         onclick="selectCharacter('Copain 3', 'Zonzon', 'message3')">
+         onclick="selectCharacter('Copain 3', 'message3', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
       <div id="message3" class="message">Zonzon?</div>
     </div>
@@ -131,7 +131,7 @@
     <div class="character" 
          onmouseover="showMessage('message4')" 
          onmouseout="hideMessage('message4')"
-         onclick="selectCharacter('Copain 4', 'Luc', 'message4')">
+         onclick="selectCharacter('Copain 4', 'message4', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png" alt="Copain 4">
       <div id="message4" class="message">Luc?</div>
     </div>
@@ -139,7 +139,7 @@
     <div class="character" 
          onmouseover="showMessage('message5')" 
          onmouseout="hideMessage('message5')"
-         onclick="selectCharacter('Copain 5', 'Mori', 'message5')">
+         onclick="selectCharacter('Copain 5', 'message5', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png" alt="Copain 5">
       <div id="message5" class="message">Mori?</div> 
     </div>
@@ -160,7 +160,7 @@
       document.getElementById(messageId).style.display = 'none';
     }
 
-    function selectCharacter(character, messageId) {
+    function selectCharacter(character, messageId, imageUrl) {
       const clickedElement = event.currentTarget;
 
       // Réinitialise toutes les sélections sauf celle du personnage "verrouillé"
@@ -177,37 +177,24 @@
       } else {
         // Si ce n'est pas verrouillé, on l'ajoute à "locked"
         clickedElement.classList.add('locked');
-        selectedCharacter = character;
+        selectedCharacter = {
+          name: character,
+          image: imageUrl
+        };
         document.getElementById('continue-button').style.display = 'block';  // Afficher le bouton "Go"
       }
     }
 
     function continueToMap() {
       if (selectedCharacter) {
-        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(selectedCharacter)}`;
+        const { name, image } = selectedCharacter;
+        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(name)}&image=${encodeURIComponent(image)}`;
       }
     }
 
-    // Désélectionner si on clique ailleurs sur la page
-    window.onclick = function(event) {
-      const characters = document.querySelectorAll('.character');
-      const button = document.getElementById('continue-button');
-
-      // Si on clique en dehors des personnages et du bouton "Go", désélectionner tout
-      if (!event.target.closest('.character') && event.target !== button) {
-        // Réinitialiser la sélection
-        characters.forEach(el => {
-          el.classList.remove('locked');
-        });
-        selectedCharacter = null;
-        document.getElementById('continue-button').style.display = 'none';  // Cacher le bouton "Go"
-      }
-    }
-
-    // Cette fonction s'assure que le bouton "Go" est bien masqué au démarrage
     window.onload = function() {
       document.getElementById('continue-button').style.display = 'none';
-    }
+    };
   </script>
 </body>
 </html>
