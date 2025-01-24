@@ -122,6 +122,22 @@
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
       <div id="message3" class="message">Zonzon?</div>
     </div>
+    <!-- Personnage 4 (Luc) -->
+    <div class="character" 
+         onmouseover="showMessage('message4')" 
+         onmouseout="hideMessage('message4')"
+         onclick="selectCharacter('Copain 4', 'Luc', 'message4')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png" alt="Copain 4">
+      <div id="message4" class="message">Luc?</div>
+    </div>
+    <!-- Personnage 5 (Mori) -->
+    <div class="character" 
+         onmouseover="showMessage('message5')" 
+         onmouseout="hideMessage('message5')"
+         onclick="selectCharacter('Copain 5', 'Mori', 'message5')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png" alt="Copain 5">
+      <div id="message5" class="message">Mori?</div> 
+    </div>
   </div>
 
   <button id="continue-button" onclick="continueToMap()">Go</button>
@@ -169,7 +185,7 @@
     window.onclick = function(event) {
       const characters = document.querySelectorAll('.character');
       const button = document.getElementById('continue-button');
-      
+
       // Si on clique en dehors des personnages et du bouton "Go", désélectionner tout
       if (!event.target.closest('.character') && event.target !== button) {
         // Réinitialiser la sélection
