@@ -13,16 +13,23 @@
       padding: 20px;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #8b7b9c;
     }
 
     .character-grid {
       display: flex;
       justify-content: center;
       gap: 40px;
-      margin-top: 20px;
+      margin-bottom: 10px;
     }
 
     .character {
@@ -31,7 +38,6 @@
       align-items: center;
       cursor: pointer;
       transition: 0.3s;
-      text-align: center;
     }
 
     .character:hover {
@@ -58,7 +64,7 @@
 
     #continue-button {
       display: none;
-      margin-top: 10px;
+      margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
       background-color: #8b7b9c;
@@ -75,19 +81,21 @@
   </style>
 </head>
 <body>
+  <h1>Choose your fighter</h1>
+
   <div class="character-grid">
     <!-- Personnage 1 -->
-    <div class="character" onclick="selectCharacter('Copain 1', 'Veux-tu jouer Angle?', 'message1')">
+    <div class="character" onclick="selectCharacter('Copain 1', 'Angle', 'message1')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
-      <div id="message1" class="message"></div> <!-- Texte sous le personnage -->
+      <div id="message1" class="message"></div>
     </div>
     <!-- Personnage 2 -->
-    <div class="character" onclick="selectCharacter('Copain 2', 'Veux-tu jouer Chim?', 'message2')">
+    <div class="character" onclick="selectCharacter('Copain 2', 'Chim', 'message2')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
       <div id="message2" class="message"></div>
     </div>
     <!-- Personnage 3 -->
-    <div class="character" onclick="selectCharacter('Copain 3', 'Veux-tu jouer Zonzon?', 'message3')">
+    <div class="character" onclick="selectCharacter('Copain 3', 'Zonzon', 'message3')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
       <div id="message3" class="message"></div>
     </div>
@@ -101,7 +109,7 @@
     let message = '';
 
     // Fonction pour sélectionner un personnage et afficher un message
-    function selectCharacter(character, msg, messageId) {
+    function selectCharacter(character, lastName, messageId) {
       // Réinitialise toutes les sélections
       document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
 
@@ -112,8 +120,8 @@
       // Enregistre le personnage sélectionné
       selectedCharacter = character;
 
-      // Affiche le message sous le personnage sélectionné
-      document.getElementById(messageId).textContent = msg;
+      // Affiche la phrase avec uniquement le dernier mot
+      document.getElementById(messageId).textContent = lastName + '?';
 
       // Affiche le bouton "Continuer" une fois qu'un personnage est sélectionné
       document.getElementById('continue-button').style.display = 'block';
