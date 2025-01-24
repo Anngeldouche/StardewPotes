@@ -60,6 +60,7 @@
       color: #8b7b9c;
       font-size: 18px;
       margin-top: 10px;
+      display: none; /* Phrase cachée au départ */
     }
 
     #continue-button {
@@ -85,19 +86,28 @@
 
   <div class="character-grid">
     <!-- Personnage 1 -->
-    <div class="character" onclick="selectCharacter('Copain 1', 'Angle', 'message1')">
+    <div class="character" 
+         onmouseover="showMessage('message1')" 
+         onmouseout="hideMessage('message1')"
+         onclick="selectCharacter('Copain 1', 'Angle', 'message1')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
-      <div id="message1" class="message"></div>
+      <div id="message1" class="message">Angle?</div> <!-- Phrase cachée par défaut -->
     </div>
     <!-- Personnage 2 -->
-    <div class="character" onclick="selectCharacter('Copain 2', 'Chim', 'message2')">
+    <div class="character" 
+         onmouseover="showMessage('message2')" 
+         onmouseout="hideMessage('message2')"
+         onclick="selectCharacter('Copain 2', 'Chim', 'message2')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
-      <div id="message2" class="message"></div>
+      <div id="message2" class="message">Chim?</div> 
     </div>
     <!-- Personnage 3 -->
-    <div class="character" onclick="selectCharacter('Copain 3', 'Zonzon', 'message3')">
+    <div class="character" 
+         onmouseover="showMessage('message3')" 
+         onmouseout="hideMessage('message3')"
+         onclick="selectCharacter('Copain 3', 'Zonzon', 'message3')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
-      <div id="message3" class="message"></div>
+      <div id="message3" class="message">Zonzon?</div>
     </div>
   </div>
 
@@ -106,9 +116,18 @@
 
   <script>
     let selectedCharacter = null;
-    let message = '';
 
-    // Fonction pour sélectionner un personnage et afficher un message
+    // Fonction pour afficher le message lorsque le curseur est sur le personnage
+    function showMessage(messageId) {
+      document.getElementById(messageId).style.display = 'block';
+    }
+
+    // Fonction pour cacher le message lorsque le curseur quitte le personnage
+    function hideMessage(messageId) {
+      document.getElementById(messageId).style.display = 'none';
+    }
+
+    // Fonction pour sélectionner un personnage
     function selectCharacter(character, lastName, messageId) {
       // Réinitialise toutes les sélections
       document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
@@ -119,9 +138,6 @@
 
       // Enregistre le personnage sélectionné
       selectedCharacter = character;
-
-      // Affiche la phrase avec uniquement le dernier mot
-      document.getElementById(messageId).textContent = lastName + '?';
 
       // Affiche le bouton "Continuer" une fois qu'un personnage est sélectionné
       document.getElementById('continue-button').style.display = 'block';
