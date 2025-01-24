@@ -50,8 +50,8 @@
     }
 
     .selected {
-      border: 3px solid #28a745;
-      box-shadow: 0 0 10px #28a745;
+      border: 3px solid #a7e684;
+      box-shadow: 0 0 10px #a7e684;
     }
 
     #continue-button {
@@ -59,7 +59,7 @@
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #28a745;
+      background-color: #a7e684;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -67,34 +67,45 @@
     }
 
     #continue-button:hover {
-      background-color: #218838;
+      background-color: #8bcf6a;
+    }
+
+    .message {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #a7e684;
+      font-size: 18px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="character-grid">
     <!-- Personnage 1 -->
-    <div class="character" onclick="selectCharacter('Copain 1')">
+    <div class="character" onclick="selectCharacter('Copain 1', 'Veux-tu jouer Angle?')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
     </div>
     <!-- Personnage 2 -->
-    <div class="character" onclick="selectCharacter('Copain 2')">
+    <div class="character" onclick="selectCharacter('Copain 2', 'Veux-tu jouer Chim?')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
     </div>
     <!-- Personnage 3 -->
-    <div class="character" onclick="selectCharacter('Copain 3')">
+    <div class="character" onclick="selectCharacter('Copain 3', 'Veux-tu jouer Zonzon?')">
       <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
     </div>
   </div>
+
+  <!-- Message dynamique -->
+  <div id="message-container" class="message"></div>
 
   <!-- Bouton continuer qui devient visible quand un perso est sélectionné -->
   <button id="continue-button" onclick="continueToMap()">Continuer</button>
 
   <script>
     let selectedCharacter = null;
+    let message = '';
 
-    // Fonction pour sélectionner un personnage
-    function selectCharacter(character) {
+    // Fonction pour sélectionner un personnage et afficher un message
+    function selectCharacter(character, msg) {
       // Réinitialise toutes les sélections
       document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
 
@@ -104,6 +115,10 @@
 
       // Enregistre le personnage sélectionné
       selectedCharacter = character;
+
+      // Affiche le message sous le personnage sélectionné
+      message = msg;
+      document.getElementById('message-container').textContent = message;
 
       // Affiche le bouton "Continuer" une fois qu'un personnage est sélectionné
       document.getElementById('continue-button').style.display = 'block';
