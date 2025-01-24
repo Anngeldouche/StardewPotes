@@ -37,7 +37,8 @@
       align-items: center;
       background-color: transparent; /* Pas de fond blanc */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      flex-direction: column; /* Permet d'afficher le texte sous l'image */
+      flex-direction: column; /* Assure le texte sous l'image */
+      align-items: center;
     }
 
     .character:hover {
@@ -78,8 +79,8 @@
       margin-top: 10px;
     }
 
-    /* Assurer que le message est sous les images et centré */
-    .character-grid .character + #message-container {
+    /* Assurer que le texte est sous les images */
+    .character + #message-container {
       text-align: center;
       margin-top: 10px;
     }
