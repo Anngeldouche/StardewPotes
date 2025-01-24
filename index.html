@@ -57,13 +57,8 @@
       border-radius: 50%;
     }
 
-    /* Effet de sélection avec un léger agrandissement */
     .selected {
-      transform: scale(1.1); /* Agrandissement léger lorsqu'il est sélectionné */
-    }
-
-    .locked {
-      transform: scale(1.1); /* Agrandissement léger lors du verrouillage */
+      transform: scale(1.1);
     }
 
     .message {
@@ -101,39 +96,39 @@
 
   <div class="character-grid">
     <div class="character" 
-         onmouseover="showMessage('message1')" 
-         onmouseout="hideMessage('message1')"
-         onclick="selectCharacter(event, 'Copain 1', 'message1', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png')">
-      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Copain 1">
-      <div id="message1" class="message">Angle?</div>
+         onmouseover="showMessage('Angle')" 
+         onmouseout="hideMessage('Angle')"
+         onclick="selectCharacter(event, 'Angle', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(1).png" alt="Angle">
+      <div id="Angle" class="message">Angle?</div>
     </div>
     <div class="character" 
-         onmouseover="showMessage('message2')" 
-         onmouseout="hideMessage('message2')"
-         onclick="selectCharacter(event, 'Copain 2', 'message2', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png')">
-      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Copain 2">
-      <div id="message2" class="message">Chim?</div> 
+         onmouseover="showMessage('Chim')" 
+         onmouseout="hideMessage('Chim')"
+         onclick="selectCharacter(event, 'Chim', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(2).png" alt="Chim">
+      <div id="Chim" class="message">Chim?</div> 
     </div>
     <div class="character" 
-         onmouseover="showMessage('message3')" 
-         onmouseout="hideMessage('message3')"
-         onclick="selectCharacter(event, 'Copain 3', 'message3', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png')">
-      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Copain 3">
-      <div id="message3" class="message">Zonzon?</div>
+         onmouseover="showMessage('Zonzon')" 
+         onmouseout="hideMessage('Zonzon')"
+         onclick="selectCharacter(event, 'Zonzon', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(3).png" alt="Zonzon">
+      <div id="Zonzon" class="message">Zonzon?</div>
     </div>
     <div class="character" 
-         onmouseover="showMessage('message4')" 
-         onmouseout="hideMessage('message4')"
-         onclick="selectCharacter(event, 'Copain 4', 'message4', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png')">
-      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png" alt="Copain 4">
-      <div id="message4" class="message">Luc?</div>
+         onmouseover="showMessage('Luc')" 
+         onmouseout="hideMessage('Luc')"
+         onclick="selectCharacter(event, 'Luc', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(4).png" alt="Luc">
+      <div id="Luc" class="message">Luc?</div>
     </div>
     <div class="character" 
-         onmouseover="showMessage('message5')" 
-         onmouseout="hideMessage('message5')"
-         onclick="selectCharacter(event, 'Copain 5', 'message5', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png')">
-      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png" alt="Copain 5">
-      <div id="message5" class="message">Mori?</div> 
+         onmouseover="showMessage('Mori')" 
+         onmouseout="hideMessage('Mori')"
+         onclick="selectCharacter(event, 'Mori', 'https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png')">
+      <img src="https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/Copainbits/Copains8B(5).png" alt="Mori">
+      <div id="Mori" class="message">Mori?</div> 
     </div>
   </div>
 
@@ -152,12 +147,12 @@
       document.getElementById(messageId).style.display = 'none';
     }
 
-    function selectCharacter(event, character, messageId, imageUrl) {
+    function selectCharacter(event, characterName, imageUrl) {
       event.stopPropagation(); // Empêche l'événement de clic de se propager au body
       document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
       const clickedElement = event.currentTarget;
       clickedElement.classList.add('selected');
-      selectedCharacter = { name: character, image: imageUrl };
+      selectedCharacter = { name: characterName, image: imageUrl };
       document.getElementById('continue-button').style.display = 'block';
     }
 
