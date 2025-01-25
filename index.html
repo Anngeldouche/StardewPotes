@@ -27,10 +27,14 @@
     }
 
     h1 {
-      margin-bottom: 20px;
       font-size: 50px;
       color: #8b7b9c;
-      position: relative; /* Empêche les déplacements causés par les animations des autres éléments */
+      position: fixed; /* Verrouille le titre */
+      top: 20px; /* Ajuste la distance par rapport au haut de la page */
+      left: 50%; /* Centre horizontalement */
+      transform: translateX(-50%); /* Centre réellement en corrigeant le décalage */
+      margin: 0;
+      z-index: 10; /* S'assure que le titre reste au-dessus des autres éléments */
     }
 
     .character-grid {
@@ -38,7 +42,6 @@
       justify-content: center;
       gap: 40px;
       margin-bottom: 10px;
-      transform: translateZ(0); /* Garde les animations localisées */
     }
 
     .character {
@@ -51,7 +54,6 @@
 
     .character:hover {
       transform: scale(1.1);
-      position: relative; /* Assure que l'agrandissement n'affecte que le personnage */
     }
 
     .character img {
@@ -60,13 +62,8 @@
       border-radius: 50%;
     }
 
-    /* Effet de sélection avec un léger agrandissement */
     .selected {
-      transform: scale(1.1); /* Agrandissement léger lorsqu'il est sélectionné */
-    }
-
-    .locked {
-      transform: scale(1.1); /* Agrandissement léger lors du verrouillage */
+      transform: scale(1.1);
     }
 
     .message {
