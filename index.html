@@ -4,97 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sélection de Personnage</title>
-  <style>
-    @font-face {
-      font-family: 'CaveStory';
-      src: url('https://raw.githubusercontent.com/Anngeldouche/StardewPotes/main/fonts/Cave-Story.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    body {
-      font-family: 'CaveStory', sans-serif;
-      text-align: center;
-      background-color: #f7c7e0;
-      margin: 0;
-      padding: 20px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-size: 50px;
-      color: #8b7b9c;
-      position: fixed; /* Verrouille le titre */
-      top: 350px; /* Ajuste la distance par rapport au haut de la page */
-      left: 50%; /* Centre horizontalement */
-      transform: translateX(-50%); /* Centre réellement en corrigeant le décalage */
-      margin: 0;
-      z-index: 10; /* S'assure que le titre reste au-dessus des autres éléments */
-    }
-
-    .character-grid {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-bottom: 10px;
-    }
-
-    .character {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .character:hover {
-      transform: scale(1.1);
-    }
-
-    .character img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-    }
-
-    .selected {
-      transform: scale(1.1);
-    }
-
-    .message {
-      font-family: 'CaveStory', sans-serif;
-      color: #8b7b9c;
-      font-size: 30px;
-      margin-top: 10px;
-      display: none;
-    }
-
-    #continue-button {
-      font-family: 'CaveStory', sans-serif;
-      display: none;
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 20px;
-      background-color: #8b7b9c;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #continue-button:hover {
-      background-color: #7a6a85;
-    }
-
-    #continue-button span {
-      color: #6d5b7b;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body onclick="deselectCharacter(event)">
   <h1>Choose your fighter</h1>
@@ -141,40 +51,6 @@
     <span>Go</span>
   </button>
 
-  <script>
-    let selectedCharacter = null;
-
-    function showMessage(messageId) {
-      document.getElementById(messageId).style.display = 'block';
-    }
-
-    function hideMessage(messageId) {
-      document.getElementById(messageId).style.display = 'none';
-    }
-
-    function selectCharacter(event, character, messageId, imageUrl) {
-      event.stopPropagation(); // Empêche l'événement de clic de se propager au body
-      document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
-      const clickedElement = event.currentTarget;
-      clickedElement.classList.add('selected');
-      selectedCharacter = { name: character, image: imageUrl };
-      document.getElementById('continue-button').style.display = 'block';
-    }
-
-    function deselectCharacter(event) {
-      if (!event.target.closest('.character')) { // Vérifie si le clic n'est pas sur un personnage
-        document.querySelectorAll('.character').forEach(el => el.classList.remove('selected'));
-        selectedCharacter = null;
-        document.getElementById('continue-button').style.display = 'none';
-      }
-    }
-
-    function continueToMap() {
-      if (selectedCharacter) {
-        const { name, image } = selectedCharacter;
-        window.location.href = `https://anngeldouche.github.io/StardewP2/?character=${encodeURIComponent(name)}&image=${encodeURIComponent(image)}`;
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
